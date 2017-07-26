@@ -21,7 +21,7 @@ public class SwaggerConfig {
     public Docket api() {
         log.info("Swagger config");
         return new Docket(DocumentationType.SWAGGER_2).groupName("Project REST Service")
-                .apiInfo(new ApiInfoBuilder().title("Ivengo REST API").description("All the methods of the REST API").build()).select().apis(
+                .apiInfo(new ApiInfoBuilder().title("Itstep REST API").description("All the methods of the REST API").build()).select().apis(
                         RequestHandlerSelectors.any())
                 .paths(PathSelectors.any()).build();
     }
