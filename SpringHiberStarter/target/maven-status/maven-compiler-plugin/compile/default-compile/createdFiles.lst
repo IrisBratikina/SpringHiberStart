@@ -1,1 +1,3 @@
+org\itstep\config\DefaultConfig.class
+org\itstep\config\SwaggerConfig.class
 org\itstep\App.class
