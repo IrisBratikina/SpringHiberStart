@@ -1,3 +1,4 @@
+org\itstep\App.class
 org\itstep\config\DefaultConfig.class
 org\itstep\config\SwaggerConfig.class
-org\itstep\App.class
+org\itstep\util\HibernateUtil.class
