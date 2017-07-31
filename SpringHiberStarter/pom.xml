@@ -24,7 +24,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <jdk.version>1.8</jdk.version>
-        <jre.version>1.8.0_131</jre.version>
+        <jre.version>1.8.0_144</jre.version>
 
         <maven.source.plugin.version>2.4</maven.source.plugin.version>
         <maven.javadoc.plugin.version>2.10.3</maven.javadoc.plugin.version>
@@ -84,6 +84,33 @@
 		</dependency>
 	
 		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>$1.5.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>1.5.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <version>1.5.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>1.5.2.RELEASE</version>
+        </dependency>
+        
+		<dependency>
+    		<groupId>org.springframework.data</groupId>
+    		<artifactId>spring-data-jpa</artifactId>
+    		<version>1.11.1.RELEASE</version>
+		</dependency>
+	
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-commons-annotations</artifactId>
 			<version>3.0.0.ga</version>
@@ -97,7 +124,7 @@
 		<dependency>
     		<groupId>org.postgresql</groupId>
     		<artifactId>postgresql</artifactId>
-    		<version>42.0.0</version>
+    		<version>42.1.1</version>
 		</dependency>
   		<dependency>
 			<groupId>javassist</groupId>

@@ -8,9 +8,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class HibernateUtil {
-	private static final SessionFactory sessionFactory = buildSessionFactory();
+	private final SessionFactory sessionFactory = buildSessionFactory();
 	 
-    private static SessionFactory buildSessionFactory() {
+    private SessionFactory buildSessionFactory() {
     	String sep = System.getProperty("file.separator");
     	try {
             return new AnnotationConfiguration().configure(
@@ -23,11 +23,11 @@ public class HibernateUtil {
         }
     }
  
-    public static SessionFactory getSessionFactory() {
+    public SessionFactory getSessionFactory() {
         return sessionFactory;
     }
  
-    public static void shutdown() {
+    public void shutdown() {
     	getSessionFactory().close();
     }
 }
