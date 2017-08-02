@@ -1,4 +1,11 @@
-org\itstep\App.class
-org\itstep\config\DefaultConfig.class
+org\itstep\controller\UserController.class
+org\itstep\dao\pojo\GoodGroups.class
+org\itstep\dao\pojo\User.class
+org\itstep\service\UserDAOService.class
 org\itstep\config\SwaggerConfig.class
 org\itstep\util\HibernateUtil.class
+org\itstep\dao\pojo\Good.class
+org\itstep\App.class
+org\itstep\dao\UserDAO.class
+org\itstep\config\DefaultConfig.class
+org\itstep\config\PostgreConfig.class
