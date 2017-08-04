@@ -5,14 +5,17 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
-import org.postgresql.ds.PGPoolingDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -21,7 +24,9 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @EnableJpaRepositories("org.itstep.dao")
 @EnableTransactionManagement
+@EnableAsync
 @EntityScan("org.itstep")
+@ConfigurationProperties
 public class PostgreConfig extends HikariConfig {
 
 	@Value(value = "${spring.datasource.hikari.username}")
@@ -69,13 +74,16 @@ public class PostgreConfig extends HikariConfig {
 		return properties;
 	}
 
-	@Bean
-	public DataSource dataSource() {
-		HikariConfig hikariConfig = new HikariConfig();
-		hikariConfig.setDataSourceClassName(dataSourceClassName);
-		hikariConfig.setJdbcUrl(url);
-		hikariConfig.setUsername(username);
-		hikariConfig.setPassword(password);
-		return new HikariDataSource(hikariConfig);
-	}
+    @Bean
+    public DataSource dataSource() {
+        Properties dataSourceProperties = new Properties();
+        dataSourceProperties.put("user", username);
+        dataSourceProperties.put("password", password);
+        dataSourceProperties.put("url", url);
+        Properties configProperties = new Properties();
+        configProperties.put("dataSourceClassName", dataSourceClassName);
+        configProperties.put("dataSourceProperties", dataSourceProperties);
+        HikariConfig hikariConfig = new HikariConfig(configProperties);
+        return new HikariDataSource(hikariConfig);
+    }
 }
