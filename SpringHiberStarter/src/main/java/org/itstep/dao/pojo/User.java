@@ -15,7 +15,7 @@ import lombok.Data;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "USER_ID", unique = true, nullable = false)
 	private Long userId;
 	
@@ -31,7 +31,7 @@ public class User {
 	@Column(name = "SECOND_NAME")
 	private String secondName;
 	
-	@Column(name = "PHONE", unique = true)
+	@Column(name = "PHONE")
 	private String phone;
 	
 	@Column(name = "ADDRESS")

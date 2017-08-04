@@ -34,8 +34,12 @@ public class UserController {
 	
 	@PutMapping(value = "")
 	public ResponseEntity<User> updateUser(@RequestBody User user){
+		User userDB = userService.getUser(user.getEmail(), user.getPassword());
+		if(userDB == null){
+			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+		}
 		userService.createAndUpdateUser(user);
-		return new ResponseEntity<User>(HttpStatus.OK);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -44,12 +48,17 @@ public class UserController {
 		if(user!=null){
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		} else{
-			return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
+			log.warn("User with email "+ email +" and password " + password + " not found!");
+			return new ResponseEntity<User>(user, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity deleteUser(@PathVariable Long userId){
+		User userDB = userService.findOne(userId);
+		if(userDB == null){
+			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		}
 		userService.deleteUser(userId);
 		return new ResponseEntity(HttpStatus.OK);
 	}

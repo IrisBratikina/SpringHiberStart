@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDAOService {
+public class UserDAOService{
 
 	@Autowired
 	UserDAO userDAO;
@@ -21,6 +21,11 @@ public class UserDAOService {
 	
 	public void deleteUser(long userId){
 		userDAO.delete(userId);
+	}
+
+	public User findOne(Long userId) {
+		User user = userDAO.findOne(userId);
+		return user;
 	}
 	
 }
