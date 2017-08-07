@@ -12,14 +12,22 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)
-public class UserDAOServiceTest {
+public class UserServiceTest {
 
 	@Autowired
-	UserDAOService userService;
+	UserService userService;
 	
 	@Test
 	public void testGetUser() {
-		
+		User user = new User();
+		user.setEmail("ignatenko2207@gmail.com");
+		user.setPassword("248842");
+		user.setFirstName("Alex");
+		user.setLastAction(System.currentTimeMillis());
+		userService.createAndUpdateUser(user);
+		User userDB = userService.getUser(user.getEmail(), user.getPassword());
+		assertNotNull(userDB);
+		userService.deleteUser(userDB.getUserId());
 	}
 
 	@Test
@@ -56,16 +64,6 @@ public class UserDAOServiceTest {
 		assertNull(userService.getUser(user.getEmail(), user.getPassword()));
 		assertNotNull(updUserDB);
 		userService.deleteUser(updUserDB.getUserId());
-	}
-
-	@Test
-	public void testDeleteUser() {
-	
-	}
-
-	@Test
-	public void testFindOne() {
-	
 	}
 
 }

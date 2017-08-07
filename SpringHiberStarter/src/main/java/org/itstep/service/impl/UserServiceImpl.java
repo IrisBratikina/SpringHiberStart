@@ -1,12 +1,13 @@
-package org.itstep.service;
+package org.itstep.service.impl;
 
 import org.itstep.dao.UserDAO;
 import org.itstep.dao.pojo.User;
+import org.itstep.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDAOService{
+public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserDAO userDAO;
@@ -21,11 +22,5 @@ public class UserDAOService{
 	
 	public void deleteUser(long userId){
 		userDAO.delete(userId);
-	}
-
-	public User findOne(Long userId) {
-		User user = userDAO.findOne(userId);
-		return user;
-	}
-	
+	}	
 }

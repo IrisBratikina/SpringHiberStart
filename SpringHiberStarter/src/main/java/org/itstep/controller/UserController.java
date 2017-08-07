@@ -1,7 +1,7 @@
 package org.itstep.controller;
 
 import org.itstep.dao.pojo.User;
-import org.itstep.service.UserDAOService;
+import org.itstep.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,12 +24,17 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 
 	@Autowired
-	UserDAOService userService;
+	UserService userService;
 	
 	@PostMapping(value = "")
 	public ResponseEntity<User> createUser(@RequestBody User user){
-		User userDB = userService.createAndUpdateUser(user);
-		return new ResponseEntity<User>(userDB, HttpStatus.CREATED);
+		User userDB = userService.getUser(user.getEmail(), user.getPassword());
+		if(userDB != null){
+			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+		} else{
+			userDB = userService.createAndUpdateUser(user);
+			return new ResponseEntity<User>(userDB, HttpStatus.CREATED);
+		}
 	}
 	
 	@PutMapping(value = "")
@@ -42,7 +47,7 @@ public class UserController {
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value = "")
 	public ResponseEntity<User> getUser(@RequestParam String email, @RequestParam String password){
 		User user = userService.getUser(email, password);
 		if(user!=null){
@@ -53,13 +58,13 @@ public class UserController {
 		}
 	}
 	
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity deleteUser(@PathVariable Long userId){
-		User userDB = userService.findOne(userId);
+	@DeleteMapping(value = "")
+	public ResponseEntity deleteUser(@RequestParam String email, @RequestParam String password){
+		User userDB = userService.getUser(email, password);
 		if(userDB == null){
 			return new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
-		userService.deleteUser(userId);
+		userService.deleteUser(userDB.getUserId());
 		return new ResponseEntity(HttpStatus.OK);
 	}
 }
