@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -76,14 +77,23 @@ public class PostgreConfig extends HikariConfig {
 
     @Bean
     public DataSource dataSource() {
-        Properties dataSourceProperties = new Properties();
-        dataSourceProperties.put("user", username);
-        dataSourceProperties.put("password", password);
-        dataSourceProperties.put("url", url);
-        Properties configProperties = new Properties();
-        configProperties.put("dataSourceClassName", dataSourceClassName);
-        configProperties.put("dataSourceProperties", dataSourceProperties);
-        HikariConfig hikariConfig = new HikariConfig(configProperties);
-        return new HikariDataSource(hikariConfig);
+    	DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("org.h2.Driver");
+        dataSource.setUrl("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1");
+        dataSource.setUsername("sa");
+        dataSource.setPassword("sa");
+
+        return dataSource;
+        
+        
+//        Properties dataSourceProperties = new Properties();
+//        dataSourceProperties.put("user", username);
+//        dataSourceProperties.put("password", password);
+//        dataSourceProperties.put("url", url);
+//        Properties configProperties = new Properties();
+//        configProperties.put("dataSourceClassName", dataSourceClassName);
+//        configProperties.put("dataSourceProperties", dataSourceProperties);
+//        HikariConfig hikariConfig = new HikariConfig(configProperties);
+//        return new HikariDataSource(hikariConfig);
     }
 }
