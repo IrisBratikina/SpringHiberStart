@@ -1,1 +1,2 @@
-org\itstep\AppTest.class
+org\itstep\service\UserServiceTest.class
+org\itstep\controller\UserControllerTest.class

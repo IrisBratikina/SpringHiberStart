@@ -1,1 +1,13 @@
+org\itstep\controller\UserController.class
+org\itstep\config\MvcConfig.class
+org\itstep\config\EmbeddedDBConfig.class
+org\itstep\dao\pojo\Good.class
 org\itstep\App.class
+org\itstep\dao\UserDAO.class
+org\itstep\dao\pojo\GoodGroups.class
+org\itstep\dao\pojo\User.class
+org\itstep\config\SwaggerConfig.class
+org\itstep\service\UserService.class
+org\itstep\config\DefaultConfig.class
+org\itstep\config\PostgreConfig.class
+org\itstep\service\impl\UserServiceImpl.class
